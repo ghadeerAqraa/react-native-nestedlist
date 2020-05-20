@@ -25,8 +25,8 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import NestedList from 'react-native-nestedlist'
-const data = [{title:'Test1111' , items :[{"sub_topic_id":1,"sub_topic_name":"Classics","is_selected":false},{"sub_topic_id":2,"sub_topic_name":"Historical","is_selected":false},{"sub_topic_id":3,"sub_topic_name":"Time travel romance","is_selected":false}],opened:false},
-{title:'Test1111333' , items :[{"sub_topic_id":1,"sub_topic_name":"Classics","is_selected":false},{"sub_topic_id":2,"sub_topic_name":"Historical","is_selected":false},{"sub_topic_id":3,"sub_topic_name":"Time travel romance","is_selected":false}],opened:false}]
+const data = [{title:'Topic 1' , items :[{"sub_topic_id":1,"sub_topic_name":"Subtopic 1","is_selected":false},{"sub_topic_id":2,"sub_topic_name":"Subtopic 2","is_selected":false},{"sub_topic_id":3,"sub_topic_name":"Subtopic 3","is_selected":false}],opened:false},
+{title:'Topic 2' , items :[{"sub_topic_id":1,"sub_topic_name":"Subtopic 1","is_selected":false},{"sub_topic_id":2,"sub_topic_name":"Subtopic 2","is_selected":false},{"sub_topic_id":3,"sub_topic_name":"Subtopic 3","is_selected":false}],opened:false}]
 const App = () => {
   const [topicsData, setTopicsData] = useState(data);
   const setTopic = (index)=>{
