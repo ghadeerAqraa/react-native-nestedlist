@@ -23,7 +23,6 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-//import NestedList from './NestedList'
 import NestedList from 'react-native-nestedlist'
 const data = [{title:'Topic 1' , items :[{"sub_topic_id":1,"sub_topic_name":"Subtopic 1","is_selected":false},{"sub_topic_id":2,"sub_topic_name":"Subtopic 2","is_selected":false},{"sub_topic_id":3,"sub_topic_name":"Subtopic 3","is_selected":false}],opened:false},
 {title:'Topic 2' , items :[{"sub_topic_id":1,"sub_topic_name":"Subtopic 1","is_selected":false},{"sub_topic_id":2,"sub_topic_name":"Subtopic 2","is_selected":false},{"sub_topic_id":3,"sub_topic_name":"Subtopic 3","is_selected":false}],opened:false}]
@@ -54,10 +53,6 @@ const toggleSelectAllSubTopics=(isSelectAll)=>{
 
 
 }
-const deSelectAll=()=>{
-  console.log('deselect all')
-
-}
 
   return (
           <View style={styles.body}>
@@ -70,6 +65,7 @@ const deSelectAll=()=>{
             toggleSelectAllSubTopics = {toggleSelectAllSubTopics}
             topicLabelStyle = {styles.topicLabelStyle}
             subTopicLabelStyle = {styles.subTopicLabelStyle}
+            selectButtonLabelStyle = {styles.topicLabelStyle}
             ></NestedList>
             </View>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   View,
@@ -6,17 +6,28 @@ import {
   StyleSheet,
   CheckBox,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  Button
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-
 const NestedList = ({
     topicsData,
     setTopic,
     setSubTopic,
-  
+    topicLabelStyle,
+    subTopicLabelStyle,
+    selectAllLabel,
+    deSelectAllLabel,
+    toggleSelectAllSubTopics,
+    selectButtonLabelStyle,
 }
 ) => {
+    const [isSelectAll , toggleSelectAll] = useState(true)
+    const handleSelectAll=()=>{
+        toggleSelectAllSubTopics(isSelectAll)
+        toggleSelectAll(!isSelectAll)
+    }
+
          const _renderSubTopic = (subTopic,index,subIndex) => {
           return (
            <View style={[styles.checkboxContainer , {paddingLeft:10}]}>
@@ -25,7 +36,7 @@ const NestedList = ({
              onValueChange={()=>setSubTopic(index,subIndex)}
              style={styles.checkbox}
            />
-           <Text style={styles.subTopicText}>{subTopic.sub_topic_name}</Text>
+           <Text style={[styles.subTopicText, subTopicLabelStyle]}>{subTopic.sub_topic_name}</Text>
          </View>
           );
         };
@@ -57,13 +68,14 @@ const NestedList = ({
                  color="black"
                  size={10}  
              />
-             <Text> {title}</Text>
+             <Text style={topicLabelStyle}> {title}</Text>
             </View>
           );
         };
      
     return (
       <View style={{width:'100%' , flex:1}}>
+          <TouchableOpacity style={[styles.selectButtonStyle]} onPress={()=> handleSelectAll()}><Text style={selectButtonLabelStyle}>{isSelectAll ? selectAllLabel: deSelectAllLabel}</Text></TouchableOpacity>
         <FlatList
       data={topicsData}
       keyExtractor={(item, i) => String(i)}
@@ -73,6 +85,8 @@ const NestedList = ({
     />
 </View>
       );
+   
+   
   }
   const styles = StyleSheet.create({
   listContainer: {flex: 1, backgroundColor: 'rgb(255, 255, 255)', padding: 15},
@@ -84,13 +98,14 @@ const NestedList = ({
   },
   checkboxContainer: {
     flexDirection: "row",
-    alignItems:'center'
+    alignItems:'center',
+    marginVertical:3
   },
   checkbox: {
     alignSelf: "center",
   },
   subTopicText: {
-    margin: 2,
+    marginHorizontal: 3,
   },
   topicWithIconStyle:{
     flex:1,flexDirection:'row',padding:4 , alignItems:'center'
@@ -99,6 +114,9 @@ const NestedList = ({
     flex: 1,
     height:40,
   },
-  bottomContainer:{flex:1,flexDirection:'row'}
+  bottomContainer:{flex:1,flexDirection:'row'},
+  selectButtonStyle:{
+margin:5
+  }
 })
   export default NestedList;
