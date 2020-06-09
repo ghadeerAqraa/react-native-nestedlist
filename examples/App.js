@@ -23,7 +23,7 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-
+//import NestedList from './NestedList'
 import NestedList from 'react-native-nestedlist'
 const data = [{title:'Topic 1' , items :[{"sub_topic_id":1,"sub_topic_name":"Subtopic 1","is_selected":false},{"sub_topic_id":2,"sub_topic_name":"Subtopic 2","is_selected":false},{"sub_topic_id":3,"sub_topic_name":"Subtopic 3","is_selected":false}],opened:false},
 {title:'Topic 2' , items :[{"sub_topic_id":1,"sub_topic_name":"Subtopic 1","is_selected":false},{"sub_topic_id":2,"sub_topic_name":"Subtopic 2","is_selected":false},{"sub_topic_id":3,"sub_topic_name":"Subtopic 3","is_selected":false}],opened:false}]
@@ -41,12 +41,35 @@ const setSubTopic=(index,subIndex)=>{
   setTopicsData(updatedSubTopicArray)      
 }
 
+
+const toggleSelectAllSubTopics=(isSelectAll)=>{
+  console.log('select all',isSelectAll)
+  const updatedSubTopicArray = [...topicsData]
+  updatedSubTopicArray.map((topic)=>{
+    topic.items.map(item => {
+      item.is_selected = isSelectAll
+    })
+  })
+  setTopicsData(updatedSubTopicArray)      
+
+
+}
+const deSelectAll=()=>{
+  console.log('deselect all')
+
+}
+
   return (
           <View style={styles.body}>
                 <NestedList
             topicsData={topicsData} 
             setTopic={setTopic}
             setSubTopic={setSubTopic}
+            selectAllLabel = {'Select All'}
+            deSelectAllLabel = {'Deselect All'}
+            toggleSelectAllSubTopics = {toggleSelectAllSubTopics}
+            topicLabelStyle = {styles.topicLabelStyle}
+            subTopicLabelStyle = {styles.subTopicLabelStyle}
             ></NestedList>
             </View>
   );
@@ -57,6 +80,12 @@ const styles = StyleSheet.create({
   body: {
     flex:1
   },
+  topicLabelStyle : {
+    fontSize:17,
+  },
+  subTopicLabelStyle : {
+    fontSize:22,
+  }
 });
 
 export default App;
