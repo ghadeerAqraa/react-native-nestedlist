@@ -32,3 +32,11 @@ const data = [{title:'Topic 1' , items :[{"sub_topic_id":1,"sub_topic_name":"Sub
 * setTopic : open/close topic items
 
 * setSubTopic : check/uncheck suptopic items for each topic
+
+* select/deselect all subtopics 
+
+* topic title style 
+
+* subTopic title style
+
+* select/deseletc button title style
