@@ -4,11 +4,11 @@ import {
   View,
   Text,
   StyleSheet,
-  CheckBox,
   FlatList,
   TouchableOpacity,
   Button
 } from 'react-native';
+import CheckBox from 'react-native-check-box';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 const NestedList = ({
     topicsData,
@@ -32,8 +32,8 @@ const NestedList = ({
           return (
            <View style={[styles.checkboxContainer , {paddingLeft:10}]}>
            <CheckBox
-             value={subTopic.is_selected}
-             onValueChange={()=>setSubTopic(index,subIndex)}
+             isChecked={subTopic.is_selected}
+             onClick={()=>setSubTopic(index,subIndex)}
              style={styles.checkbox}
            />
            <Text style={[styles.subTopicText, subTopicLabelStyle]}>{subTopic.sub_topic_name}</Text>
