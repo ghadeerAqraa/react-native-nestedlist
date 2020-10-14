@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Button
 } from 'react-native';
-import CheckBox from 'react-native-check-box';
+import CheckBox from '@react-native-community/checkbox';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 const NestedList = ({
     topicsData,
@@ -30,14 +30,25 @@ const NestedList = ({
 
          const _renderSubTopic = (subTopic,index,subIndex) => {
           return (
-           <View style={[styles.checkboxContainer , {paddingLeft:10}]}>
+            <View style={[styles.checkboxContainer , {paddingLeft:10}]}>
+
+           <View style={ { width:20,
+    height:20}}>
            <CheckBox
-             isChecked={subTopic.is_selected}
-             onClick={()=>setSubTopic(index,subIndex)}
+             value={subTopic.is_selected}
+             onValueChange={()=>setSubTopic(index,subIndex)}
              style={styles.checkbox}
+             style={{ height: 20, width: 20 }}
+             animationDuration={0.1}
+             onAnimationType="fade"
+             offAnimationType="fade"
+             boxType="square"
+             disabled={false}
            />
-           <Text style={[styles.subTopicText, subTopicLabelStyle]}>{subTopic.sub_topic_name}</Text>
          </View>
+          <Text style={[styles.subTopicText, subTopicLabelStyle]}>{subTopic.sub_topic_name}</Text>
+         </View>
+
           );
         };
 
@@ -99,7 +110,7 @@ const NestedList = ({
   checkboxContainer: {
     flexDirection: "row",
     alignItems:'center',
-    marginVertical:3
+    marginVertical:4,
   },
   checkbox: {
     alignSelf: "center",

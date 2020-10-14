@@ -1,6 +1,6 @@
 {
   "name": "react-native-nestedlist",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "description": "A nested list component",
   "main": "index.js",
   "scripts": {
@@ -21,8 +21,9 @@
     "url": "https://github.com/ghadeerAqraa/react-native-nestedlist/issues"
   },
   "dependencies": {
-    "react-native-vector-icons": "^6.6.0",
-    "react-native-check-box":"^2.1.7"
+    "@react-native-community/checkbox": "^0.5.5",
+    "react-native-check-box": "^2.1.7",
+    "react-native-vector-icons": "^6.6.0"
   },
   "homepage": "https://github.com/ghadeerAqraa/react-native-nestedlist#readme"
 }
