@@ -9,7 +9,6 @@ import {
   Button
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
-import Icon from 'react-native-vector-icons/FontAwesome5';
 const NestedList = ({
     topicsData,
     setTopic,
@@ -20,6 +19,13 @@ const NestedList = ({
     deSelectAllLabel,
     toggleSelectAllSubTopics,
     selectButtonLabelStyle,
+    showSelectAllButton = false,
+    tintColor='#9ea1b4',
+    onCheckColor='#6945ff',
+             onFillColor='#13f4ae',
+             onTintColor='#13f4ae',
+             boxType="square",
+             lineWidth=1
 }
 ) => {
     const [isSelectAll , toggleSelectAll] = useState(true)
@@ -30,10 +36,9 @@ const NestedList = ({
 
          const _renderSubTopic = (subTopic,index,subIndex) => {
           return (
-            <View style={[styles.checkboxContainer , {paddingLeft:10}]}>
+            <View style={[styles.checkboxContainer , {paddingLeft:70}]}>
 
-           <View style={ { width:20,
-    height:20}}>
+           <View style={ { width:20, height:20}}>
            <CheckBox
              value={subTopic.is_selected}
              onValueChange={()=>setSubTopic(index,subIndex)}
@@ -42,8 +47,13 @@ const NestedList = ({
              animationDuration={0.1}
              onAnimationType="fade"
              offAnimationType="fade"
-             boxType="square"
+             tintColor={tintColor}
+             onCheckColor={onCheckColor}
+             onFillColor={onFillColor}
+             onTintColor={onTintColor}
+             boxType={boxType}
              disabled={false}
+             lineWidth={lineWidth}
            />
          </View>
           <Text style={[styles.subTopicText, subTopicLabelStyle]}>{subTopic.sub_topic_name}</Text>
@@ -54,12 +64,13 @@ const NestedList = ({
 
 
         const _renderListItem = ({item,index}) => {
+          let selectedSubTopics = item.items.filter(subTopic => subTopic.is_selected == true)
           return (
             <View style={{flex:1,flexDirection:'column',paddingLeft:10}}>
             <TouchableOpacity
               onPress={() => setTopic(index)}
               style={styles.item}>
-                {item.opened ? _renderTopicTitleWithIconView(item.title,'minus') : _renderTopicTitleWithIconView(item.title,'plus')  }
+               {_renderTopicTitleWithIconView(item.title, item.topicIcon,selectedSubTopics.length+ '/' + item.items.length)}
             </TouchableOpacity>
             {item.opened && <View>
               {item.items.map((subTopic , subIndex)=>(
@@ -71,22 +82,23 @@ const NestedList = ({
           );
         };
 
-        const _renderTopicTitleWithIconView = (title,iconName) => {
+        const _renderTopicTitleWithIconView = (title,Icon,selectedItemText) => {
           return (
             <View style={styles.topicWithIconStyle}>
-                <Icon
-                 name={iconName}
-                 color="black"
-                 size={10}  
-             />
+              <View style={{width:40 , justifyContent:'center' }}>
+                {Icon}
+                </View>
              <Text style={topicLabelStyle}> {title}</Text>
+          <Text style={[topicLabelStyle,{color:'#9ea1b4',paddingHorizontal:4}]}>({selectedItemText})</Text>
             </View>
           );
         };
      
     return (
       <View style={{width:'100%' , flex:1}}>
+        {showSelectAllButton &&(
           <TouchableOpacity style={[styles.selectButtonStyle]} onPress={()=> handleSelectAll()}><Text style={selectButtonLabelStyle}>{isSelectAll ? selectAllLabel: deSelectAllLabel}</Text></TouchableOpacity>
+          )}
         <FlatList
       data={topicsData}
       keyExtractor={(item, i) => String(i)}
@@ -110,7 +122,7 @@ const NestedList = ({
   checkboxContainer: {
     flexDirection: "row",
     alignItems:'center',
-    marginVertical:4,
+    marginVertical:10,
   },
   checkbox: {
     alignSelf: "center",
@@ -119,7 +131,7 @@ const NestedList = ({
     marginHorizontal: 3,
   },
   topicWithIconStyle:{
-    flex:1,flexDirection:'row',padding:4 , alignItems:'center'
+    flex:1,flexDirection:'row', alignItems:'center' , paddingHorizontal:20 , paddingVertical:10
   },
   appButtonStyle:{
     flex: 1,
