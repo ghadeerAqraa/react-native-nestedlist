@@ -1,6 +1,6 @@
 {
   "name": "react-native-nestedlist",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A nested list component",
   "main": "index.js",
   "scripts": {

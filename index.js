@@ -6,7 +6,6 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
-  Button
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 const NestedList = ({
@@ -37,7 +36,6 @@ const NestedList = ({
          const _renderSubTopic = (subTopic,index,subIndex) => {
           return (
             <View style={[styles.checkboxContainer , {paddingLeft:70}]}>
-
            <View style={ { width:20, height:20}}>
            <CheckBox
              value={subTopic.is_selected}
@@ -56,7 +54,9 @@ const NestedList = ({
              lineWidth={lineWidth}
            />
          </View>
+         <TouchableOpacity onPress={()=>setSubTopic(index,subIndex)}>
           <Text style={[styles.subTopicText, subTopicLabelStyle]}>{subTopic.sub_topic_name}</Text>
+          </TouchableOpacity>
          </View>
 
           );
@@ -66,7 +66,7 @@ const NestedList = ({
         const _renderListItem = ({item,index}) => {
           let selectedSubTopics = item.items.filter(subTopic => subTopic.is_selected == true)
           return (
-            <View style={{flex:1,flexDirection:'column',paddingLeft:10}}>
+            <View style={{flex:1,flexDirection:'column',paddingLeft:10}} key={index}>
             <TouchableOpacity
               onPress={() => setTopic(index)}
               style={styles.item}>
@@ -104,7 +104,6 @@ const NestedList = ({
       keyExtractor={(item, i) => String(i)}
       renderItem={_renderListItem}
       keyboardShouldPersistTaps="handled"
-      initialNumToRender={8}
     />
 </View>
       );
